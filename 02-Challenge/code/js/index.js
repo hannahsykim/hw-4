@@ -191,14 +191,14 @@ function checkHighScore(score) {
 }
 
 function saveHighScore(score, highScores) {
-    const name = prompt(‘You got a high score! Enter name:’);
+    const name = prompt('You got a high score! Enter name:');
     const newScore = { score, name };
 
     // 1. Add to list
   highScores.push(newScore);
 
   // 2. Sort the list
-  highScores.sort((a, b) => b.score - a.score);
+  highScores.sort((a, b) => b.score - a.score);
   
   // 3. Select new list
   highScores.splice(NO_OF_HIGH_SCORES);
@@ -216,17 +216,24 @@ function showHighScores() {
       .join('');
 }
 
-function gameOverScreen() {
+  function gameOverScreen() {
     quiz.innerHTML = /*html*/`
     <p>
-        Game Over!
+    Game Over
     </p>
-
-    checkHighScore(account.score);
-    
-
-    <button id="restart-btn">restart</button>
+    <p>
+    You got a high score! Enter name:
+    </p>
+    <form><input type="text" class="form-input" placeholder=" "></form>
+    <button class="submit-btn">Submit</button>
+    <button id="restart-btn">Restart</button>
     `
+    document.getElementById('submit-btn').addEventListener(
+        'click',
+        function(event) {
+         highscore.innerHTML = /*html*/`
+        }
+
     document
     .querySelector('#restart-btn')
     .addEventListener(
@@ -235,9 +242,9 @@ function gameOverScreen() {
             window.location.reload();
         }
     )
+    checkHighScore(account.score);
+  
 }
-
-
 
 
 homePage()
