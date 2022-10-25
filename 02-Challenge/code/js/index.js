@@ -65,6 +65,7 @@ function homePage () {
     </p>
     <button id="startQuiz">start quiz</button>
     `
+
     document
     .getElementById('startQuiz')
     .addEventListener(
@@ -75,6 +76,8 @@ function homePage () {
     )
 
 }
+homePage();
+
 var timerEl = document.getElementById('countdown');
 
 function countdown() {
@@ -214,25 +217,28 @@ function showHighScores() {
     highScoreList.innerHTML = highScores
       .map((score) => `<li>${score.score} - ${score.name}`)
       .join('');
+
 }
 
-  function gameOverScreen() {
+var viewHighScore = document.getElementById(".highScores");
+
+function gameOverScreen() {
     quiz.innerHTML = /*html*/`
-    <p>
-    Game Over
-    </p>
-    <p>
-    You got a high score! Enter name:
-    </p>
-    <form><input type="text" class="form-input" placeholder=" "></form>
-    <button class="submit-btn">Submit</button>
-    <button id="restart-btn">Restart</button>
+        <p>Game Over</p>
+        <p>You got a high score! Enter name:</p>
+        <form><input type="text" class="form-input" placeholder="Your Name "></form>
+        <button id="submit-btn">Submit</button>
+        <button id="restart-btn">Restart</button>
     `
-    document.getElementById('submit-btn').addEventListener(
+    document
+    .querySelector('#submit-btn')
+    .addEventListener(
         'click',
-        function(event) {
-         highscore.innerHTML = /*html*/`
+        function(event) { 
+            window.open(viewHighScore, "_blank");
         }
+    )
+    
 
     document
     .querySelector('#restart-btn')
@@ -242,10 +248,29 @@ function showHighScores() {
             window.location.reload();
         }
     )
+
     checkHighScore(account.score);
   
 }
 
+var goBackEl = document.querySelector('#goBack')
+var resetscoreEl = document.getElementById('#resetscore')
 
-homePage()
+function resetscoreEl() {
+    document.addEventListener(
+        'click',
+        function myFunction() {
+            localStorage.clear();
+        }
+    )
+}
+
+function goBackEl() {
+    document.addEventListener(
+        'click',
+        function myFunction() {
+            window.history.go(-1);
+        }
+    )
+}
 
