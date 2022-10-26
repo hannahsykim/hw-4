@@ -1,4 +1,5 @@
 var quiz  = document.getElementById("quiz");
+var score = 0;
 var questions = [
  {  
     title: 'How many sides are in a triangle?',
@@ -180,47 +181,10 @@ function questionPage (quesEl) {
      currentQuestion++;
          questionPage(questions[currentQuestion])
         })
-        
+     
 }
 
-function checkHighScore(score) {
-    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
-    const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
-    
-    if (score > lowestScore) {
-      saveHighScore(score, highScores); // TODO
-      showHighScores(); // TODO
-    }
-}
-
-function saveHighScore(score, highScores) {
-    const name = prompt('You got a high score! Enter name:');
-    const newScore = { score, name };
-
-    // 1. Add to list
-  highScores.push(newScore);
-
-  // 2. Sort the list
-  highScores.sort((a, b) => b.score - a.score);
-  
-  // 3. Select new list
-  highScores.splice(NO_OF_HIGH_SCORES);
-  
-  // 4. Save to local storage
-  localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
-}
-
-function showHighScores() {
-    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
-    const highScoreList = document.getElementById(HIGH_SCORES);
-    
-    highScoreList.innerHTML = highScores
-      .map((score) => `<li>${score.score} - ${score.name}`)
-      .join('');
-
-}
-
-var viewHighScore = document.getElementById(".highScores");
+questionPage();
 
 function gameOverScreen() {
     quiz.innerHTML = /*html*/`
@@ -234,11 +198,10 @@ function gameOverScreen() {
     .querySelector('#submit-btn')
     .addEventListener(
         'click',
-        function(event) { 
-            window.open(viewHighScore, "_blank");
+        function(event) {
+            document.location.href = 'highscore.html';
         }
     )
-    
 
     document
     .querySelector('#restart-btn')
@@ -247,30 +210,34 @@ function gameOverScreen() {
         function(GameOver) {
             window.location.reload();
         }
-    )
-
-    checkHighScore(account.score);
-  
+    ) 
+     
 }
 
-var goBackEl = document.querySelector('#goBack')
-var resetscoreEl = document.getElementById('#resetscore')
+gameOverScreen();
 
-function resetscoreEl() {
-    document.addEventListener(
-        'click',
-        function myFunction() {
-            localStorage.clear();
-        }
-    )
+function viewHighScore() {
+   
+    var backEl  = document.getElementById("#goBack");
+    var resetEl = document.getElementById("#reset");
+    
+    document
+        .querySelector(backEl)
+        .addEventListener(
+            'click',
+            function() {
+                history.back();
+            }
+        )
+    document
+        .querySelector(resetEl)
+        .addEventListener(
+            'click',
+            function() {
+                localStorage.clear();
+            }
+        )
+   
 }
 
-function goBackEl() {
-    document.addEventListener(
-        'click',
-        function myFunction() {
-            window.history.go(-1);
-        }
-    )
-}
-
+viewHighScore();
