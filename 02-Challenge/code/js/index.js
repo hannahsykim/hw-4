@@ -89,9 +89,12 @@ function countdown() {
       timeLeft = 0;
       gameOverScreen();
     }
-    if (questionPage.length === currentQuestion - 1) {
-      clearTimeout(timeInterval);
-      timerEl.textContent = " YOU'RE DONE";
+
+    if (gameOverScreen == currentQuestion -1) {
+      clearInterval(timeInterval);
+      timerEl.textContent = "DONE ";
+      console.log(timerEl.textContent)
+
     }
   }, 1000);
 }
@@ -175,10 +178,10 @@ function checkAnswer(event) {
     return;
   }
 
-  if (questionPage.length === currentQuestion - 1) {
+  if (questionPage.length === currentQuestion -1) {
     gameOverScreen();
   } else {
-    currentQuestion++;
-    questionPage(quesEl[currentQuestion]);
+  currentQuestion++;
+  questionPage(quesEl[currentQuestion]);
   }
 }
