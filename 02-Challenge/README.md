@@ -2,10 +2,6 @@
 
 ## Description
 Fun and simple Trivia Quiz
-
-## Visuals
-/pending
-
 ## Acceptance Criteria
 ```
 GIVEN I am taking a code quiz
